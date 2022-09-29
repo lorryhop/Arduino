@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta name="viewport"content="width=device-width,initial-scale=1,user-scalable=no"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" href="data:,">
+<style>
+body{text-align:center;font-family:verdana;}
+button{border:0;border-radius:0.3rem;color:rgb(236, 93, 201);line-height:2.4rem;font-size:1.2rem;width:100%}
+</style>
+</head>
+
+<TITLE>
+WIFI Controler
+</TITLE>
+
+<BODY>
+<div style="text-align:center;display:inline-block;min-width:260px;">
+<CENTER>
+<h2>우리집 IOT System</h2>
+<h3>거실스탠드</h3>
+<p><button id="button" class="button"><sapn id="state">OFF</sapn></button></p>
+<p>
+  타이머
+  <input id="timer_minute" type="text" value="0">     
+  <span>분</span> 
+  <input id="timer" type="submit" value="설정"></inpit>
+</p>
+</CENTER>
+</BODY>
+</HTML>
+
+<script>
+  var gateway = `ws://${window.location.hostname}/ws`;
+  var websocket;
+  window.addEventListener('load', onLoad);
+  function initWebSocket() {
+    console.log('Trying to open a WebSocket connection...');
+    websocket = new WebSocket(gateway);
+    websocket.onopen    = onOpen;
+    websocket.onclose   = onClose;
+    websocket.onmessage = onMessage;
+  }
+  function onOpen(event) {
+    console.log('Connection opened');
+    websocket.send('status');
+  }
+  function onClose(event) {
+    console.log('Connection closed');
+    setTimeout(initWebSocket, 2000);
+  }
+
+  function onMessage(event) {
+    var state
+    var msg = event.data.split('#');
+    var buttonColor;
+    if (msg[0] == "0"){
+      state = "ON";
+      buttonColor = "#fdfa3d"
+    }
+    else if (msg[0] == "1") {
+      state = "OFF";
+      buttonColor = "#1fa3ec"
+    }
+    document.getElementById('state').innerHTML = state;
+    document.getElementById('timer_minute').value = msg[1];
+    button.style.backgroundColor = buttonColor;
+  }
+  function onLoad(event) {
+    initWebSocket();
+    initButton();
+  }
+  function initButton() {
+    document.getElementById('button').addEventListener('click', toggle);
+    document.getElementById('timer').addEventListener('click', timer);
+  }
+  function toggle(){
+    websocket.send('toggle');
+  }
+  function timer(){
+    var msg = "@" + document.getElementById("timer_minute").value;
+    console.log(msg);
+    websocket.send(msg);
+  }
+
+
+</script>
