@@ -18,7 +18,7 @@ TM1637Display display(CLK, DIO);
 
 long duration, distance;    // 거리 측정을 위한 변수 선언
 
-long lcdShowCount = 360; // 360은 대략 3분
+long lcdShowCount = 120; // 120은 대략 30초
 
 void setup() {
   Serial.begin(9600); //PC-아두이노간
@@ -48,8 +48,7 @@ void loop() { // run over and over
   if(lcdShowCount >= 0) {
     display.showNumberDec(distance); //Display the numCounter value;
   } else {
-    display.setBrightness(0);
-    display.showNumberDec(0);
+    display.clear();
   }
 
   if(Serial.available()) {      // 시리얼모니터에 입력된 데이터가 있다면

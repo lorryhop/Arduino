@@ -64,7 +64,7 @@ void loop() {
     count = 100;
   }
   
-  if(recvDistance >= 3000) { // 3 미터 이상이 되면
+  if(recvDistance >= 2000) { // 2미터 이상이 되면
     if(alerted == false) {
       tone(BUZ, 300, 150);
       tone(BUZ, 800, 200);
