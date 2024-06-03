@@ -1,5 +1,7 @@
 /*
  * 영어교육용
+ * 최종수정 : 20231009 시간 135초로 줄임(근데어항옆거는 업로드가 안되서 실패
+ * 그래서 relayPin = 4이다
 */
 
 #include <Wire.h>
@@ -7,7 +9,7 @@
 
 
 //릴레이 신호핀
-const int relayPin = 4;
+const int relayPin = 7;
 
 //define microwave(초음파)
 const int triggerPin = 13;
@@ -58,8 +60,8 @@ void loop()
 
   Serial.println("");
   
-  if(distance > 10 && distance < 600) {//60cm
-    timer = 120;
+  if(distance >= 50 && distance <= 700) {//70cm
+    timer = 135;
   }
   
   if(timer > 0) {

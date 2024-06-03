@@ -26,7 +26,7 @@ const long interval = 10000;
 int ledState = 0;
 boolean alerted = false;
 
-int count = 100;
+int count = 200;
 
 void setup() {
   Serial.begin(9600); //PC-아두이노간
@@ -64,7 +64,7 @@ void loop() {
     count = 100;
   }
   
-  if(recvDistance >= 2000) { // 2미터 이상이 되면
+  if(recvDistance > 30 && recvDistance < 1000) { // 1미터 내로 접근하면
     if(alerted == false) {
       tone(BUZ, 300, 150);
       tone(BUZ, 800, 200);

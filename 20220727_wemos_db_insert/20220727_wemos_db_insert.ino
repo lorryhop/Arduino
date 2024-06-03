@@ -7,7 +7,9 @@
 
 byte mac_addr[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 
-IPAddress server_addr(183,111,174,96);  // IP of the MySQL *server* here
+//IPAddress server_addr(183,111,174,96);  // IP of the MySQL *server* here
+IPAddress server_addr(133,186,250,80);  // IP of the MySQL *server* here
+
 char user[] = "kevin1217";              // MySQL user login username
 char password[] = "pl!@546130A";        // MySQL user login password
 

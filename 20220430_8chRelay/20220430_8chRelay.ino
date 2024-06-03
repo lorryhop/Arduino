@@ -12,7 +12,7 @@ const int BTN4 = 6; //R1
 const int BTN5 = 7; //R2
 
 int rcnt = 5;
-int fan_after_sec = 10000;
+int fan_after_sec = 5000;
 
 int fan_stat = 1;
 int btn1_stat = 1;
@@ -136,9 +136,16 @@ void loop()
 
     digitalWrite(RELAYS[3], btn5_stat);
 
+/*잘못된것으로 의심되는 부분 주석(btn4_stat 이 왜 나오냐 
     if(btn4_stat == HIGH) { // 본기계작동후 팬을 n초간 더 돌리기 위함.
       delay(fan_after_sec);  
     }
+*/
+    if(btn5_stat == HIGH) { // 본기계작동후 팬을 n초간 더 돌리기 위함.
+      delay(fan_after_sec);  
+    }
+
+
 
     delay(200);
   }

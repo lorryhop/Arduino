@@ -17,7 +17,7 @@
 
 // Which pin on the Arduino is connected to the NeoPixels?
 // On a Trinket or Gemma we suggest changing this to 1:
-#define LED_PIN    8
+#define LED_PIN    12
 
 // How many NeoPixels are attached to the Arduino?
 #define LED_COUNT 60
@@ -53,18 +53,24 @@ void setup() {
 // loop() function -- runs repeatedly as long as board is on ---------------
 
 void loop() {
+  colorWipe(strip.Color(255,   255,   255), 10); // Red
+  delay(20000);
+  
   // Fill along the length of the strip in various colors...
-  colorWipe(strip.Color(255,   0,   0), 50); // Red
-  colorWipe(strip.Color(  0, 255,   0), 50); // Green
-  colorWipe(strip.Color(  0,   0, 255), 50); // Blue
+  colorWipe(strip.Color(255,   0,   0), 10); // Red
+  delay(10000);
+  colorWipe(strip.Color(  0, 255,   0), 10); // Green
+  delay(10000);
+  colorWipe(strip.Color(  0,   0, 255), 10); // Blue
+  delay(10000);
 
   // Do a theater marquee effect in various colors...
-  theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
-  theaterChase(strip.Color(127,   0,   0), 50); // Red, half brightness
-  theaterChase(strip.Color(  0,   0, 127), 50); // Blue, half brightness
+  //theaterChase(strip.Color(127, 127, 127), 10); // White, half brightness
+  //theaterChase(strip.Color(127,   0,   0), 10); // Red, half brightness
+  //theaterChase(strip.Color(  0,   0, 127), 10); // Blue, half brightness
 
   rainbow(10);             // Flowing rainbow cycle along the whole strip
-  theaterChaseRainbow(50); // Rainbow-enhanced theaterChase variant
+  theaterChaseRainbow(10); // Rainbow-enhanced theaterChase variant
 }
 
 
